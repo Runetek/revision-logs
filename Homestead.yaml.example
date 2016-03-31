@@ -1,0 +1,38 @@
+---
+ip: "192.168.10.10"
+memory: 2048
+cpus: 2
+hostname: revision-logs
+name: revision-logs
+provider: virtualbox
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: "/Users/kylestev/Code/revision-logs"
+      to: "/home/vagrant/revision-logs"
+      type: "nfs"
+
+sites:
+    - map: revisionlogs.app
+      to: "/home/vagrant/revision-logs/public"
+      hhvm: true
+
+databases:
+    - revision_logs
+
+# blackfire:
+#     - id: foo
+#       token: bar
+#       client-id: foo
+#       client-token: bar
+
+# ports:
+#     - send: 50000
+#       to: 5000
+#     - send: 7777
+#       to: 777
+#       protocol: udp
