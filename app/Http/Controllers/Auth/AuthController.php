@@ -119,7 +119,7 @@ class AuthController extends Controller
         $user->token = $oauthUser->token;
         $user->email = $oauthUser->getEmail();
         $user->avatar = $oauthUser->getAvatar();
-        $user->username = $oauthUser->getNickname();
+        $user->username = $oauthUser->getNickname() ?: $oauthUser->getName();
         $user->save();
 
         Auth::login($user);
