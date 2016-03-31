@@ -4,7 +4,7 @@
   <h1>
     <a href="/users/{{ $log->user->id }}">{{ $log->user->username }}</a>'s
     Updater Log for
-    <a href="/revisions/{{ $revision->id }}">
+    <a href="/revisions/{{ $revision->id }}/logs">
       #{{ $revision->id }}
     </a>
   </h1>
