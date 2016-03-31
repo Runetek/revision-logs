@@ -31,7 +31,7 @@
         @foreach ($logs as $log)
           <tr>
             <td>
-              <a href="/revisions/{{ $revision->id }}/logs/{{ $log->user->id }}">
+              <a href="/revisions/{{ $revision->id }}/logs/{{ $log->id }}">
                 {{ $log->id }}
               </a>
             </td>
