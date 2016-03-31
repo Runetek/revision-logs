@@ -116,7 +116,10 @@ class AuthController extends Controller
         if (User::whereEmail($email)->exists()) {
             $user = User::whereEmail($email)->first();
         } else {
-            $user = new User(['oauth_provider' => $provider]);
+            $user = new User([
+                'email' => $email,
+                'oauth_provider' => $provider,
+            ]);
         }
 
         $user->token = $oauthUser->token;
