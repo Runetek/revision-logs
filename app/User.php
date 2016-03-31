@@ -13,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'github_id',
+        'username', 'email', 'oauth_provider',
     ];
 
     /**

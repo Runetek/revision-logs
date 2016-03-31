@@ -111,10 +111,13 @@ class AuthController extends Controller
     {
         $oauthUser = Socialite::driver($provider)->user();
 
-        $user = User::firstOrNew([
-            'oauth_provider' => $provider,
-            'email' => $oauthUser->getEmail()
-        ]);
+        $email = $oauthUser->getEmail();
+
+        if (User::whereEmail($email)->exists()) {
+            $user = User::whereEmail($email)->first();
+        } else {
+            $user = new User(['oauth_provider' => $provider]);
+        }
 
         $user->token = $oauthUser->token;
         $user->oauth_id = $oauthUser->getId();
