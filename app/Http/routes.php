@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::get('auth/github/callback', 'Auth\AuthController@handleProviderGithub');
 Route::get('auth/google/callback', 'Auth\AuthController@handleProviderGoogle');
 
+Route::get('auth/login', function () {
+    return view('login');
+});
+
 Route::get('revisions', 'RevisionsController@index');
 Route::get('revisions/{revision}', 'RevisionsController@show');
 

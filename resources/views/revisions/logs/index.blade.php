@@ -13,7 +13,7 @@
           Submit Log
         </a>
       @else
-        Want to submit a log? <a href="/auth/github">login or register</a> first.
+        Want to submit a log? <a href="/auth/login">login or register</a> first.
       @endif
     </div>
   </div>
