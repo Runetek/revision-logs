@@ -77,9 +77,29 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToGithub()
     {
         return Socialite::driver('github')->redirect();
+    }
+
+    /**
+     * Redirect the user to the Google authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderGithub()
+    {
+        return $this->handleProviderCallback('github');
+    }
+
+    public function handleProviderGoogle()
+    {
+        return $this->handleProviderCallback('google');
     }
 
     /**
@@ -87,16 +107,19 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($provider)
     {
-        $githubUser = Socialite::driver('github')->user();
+        $oauthUser = Socialite::driver($provider)->user();
 
-        $user = User::firstOrNew(['github_id' => $githubUser->getId()]);
+        $user = User::firstOrNew([
+            'oauth_provider' => $provider,
+            'oauth_id' => $oauthUser->getId()
+        ]);
 
-        $user->token = $githubUser->token;
-        $user->email = $githubUser->getEmail();
-        $user->avatar = $githubUser->getAvatar();
-        $user->username = $githubUser->getNickname();
+        $user->token = $oauthUser->token;
+        $user->email = $oauthUser->getEmail();
+        $user->avatar = $oauthUser->getAvatar();
+        $user->username = $oauthUser->getNickname();
         $user->save();
 
         Auth::login($user);

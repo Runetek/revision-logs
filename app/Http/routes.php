@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('auth/github/callback', 'Auth\AuthController@handleProviderGithub');
+Route::get('auth/google/callback', 'Auth\AuthController@handleProviderGoogle');
 
 Route::get('revisions', 'RevisionsController@index');
 Route::get('revisions/{revision}', 'RevisionsController@show');
@@ -29,7 +30,8 @@ Route::get('revisions/{revision}/logs/{revision_log}', [
 ]);
 
 Route::group(['middleware' => 'webhooks'], function () {
-    Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
+    Route::get('auth/github', 'Auth\AuthController@redirectToGithub');
+    Route::get('auth/google', 'Auth\AuthController@redirectToGoogle');
 });
 
 

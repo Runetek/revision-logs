@@ -18,7 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('avatar');
             $table->string('token');
-            $table->integer('github_id')->unsigned()->unique();
+            $table->string('oauth_id');
+            $table->string('oauth_provider');
             $table->timestamps();
         });
     }
