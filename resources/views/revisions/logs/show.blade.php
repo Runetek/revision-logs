@@ -16,7 +16,11 @@
           Revision
         </label>
         <div class="col-sm-10">
-          <select name="revision_id" class="form-control">
+          <select
+            name="revision_id"
+            class="form-control"
+            onchange="document.location.href = '/revisions/' + this.value + '/logs?filter[user_id]={{ $log->user_id }}'"
+          >
             @foreach ($log->user->logs as $log)
               <option selected value="{{ $log->revision_id }}">{{ $log->revision_id }}</option>
             @endforeach

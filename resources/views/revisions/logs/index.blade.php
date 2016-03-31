@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($revision->logs as $log)
+        @foreach ($logs as $log)
           <tr>
             <td>
               <a href="/revisions/{{ $revision->id }}/logs/{{ $log->user->id }}">

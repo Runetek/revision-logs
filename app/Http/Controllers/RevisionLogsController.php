@@ -9,11 +9,28 @@ use Illuminate\Http\Request;
 
 class RevisionLogsController extends Controller
 {
-    public function index(Revision $revision)
+    public function index(Revision $revision, Request $request)
     {
         $revision->with('logs.user');
+
+        $logs = $this->applyLogFilters($request->get('filter', []), $revision);
+
         return view('revisions.logs.index')
-            ->withRevision($revision);
+            ->withRevision($revision)
+            ->withLogs($logs);
+    }
+
+    private function applyLogFilters(array $filters, Revision $revision)
+    {
+        $appovedFilters = collect($filters)->only('user_id');
+
+        $query = $revision->logs()->with('user');
+
+        $appovedFilters->each(function ($value, $key) use ($query) {
+            return $query->where($key, $value);
+        });
+
+        return $query->get();
     }
 
     public function create(Revision $revision)
