@@ -161,6 +161,7 @@ return [
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Maknz\Slack\SlackServiceProvider::class,
 
     ],
 
@@ -208,6 +209,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Slack' => Maknz\Slack\Facades\Slack::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
