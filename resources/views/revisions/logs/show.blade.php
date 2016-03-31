@@ -21,8 +21,13 @@
             class="form-control"
             onchange="document.location.href = '/revisions/' + this.value + '/logs?filter[user_id]={{ $log->user_id }}'"
           >
-            @foreach ($log->user->logs as $log)
-              <option selected value="{{ $log->revision_id }}">{{ $log->revision_id }}</option>
+            @foreach ($log->user->logs as $revLog)
+              <option
+                {{ $log->id === $revLog->id ? 'selected ' : '' }}
+                value="{{ $revLog->revision_id }}"
+              >
+                {{ $revLog->revision_id }}
+              </option>
             @endforeach
           </select>
         </div>
