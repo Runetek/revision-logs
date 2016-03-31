@@ -23,7 +23,7 @@
       <thead>
         <tr>
           <th>Log</th>
-          <th>Sumitter</th>
+          <th>Submitter</th>
           <th>Submitted</th>
         </tr>
       </thead>
