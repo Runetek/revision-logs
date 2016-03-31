@@ -125,7 +125,11 @@ class AuthController extends Controller
         $user->token = $oauthUser->token;
         $user->oauth_id = $oauthUser->getId();
         $user->avatar = $oauthUser->getAvatar();
-        $user->username = $oauthUser->getNickname() ?: $oauthUser->getName();
+
+        if ( ! is_null($user->username)) {
+            $user->username = $oauthUser->getNickname() ?: $oauthUser->getName();
+        }
+
         $user->save();
 
         Auth::login($user);
