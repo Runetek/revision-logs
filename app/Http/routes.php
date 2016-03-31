@@ -33,6 +33,16 @@ Route::get('revisions/{revision}/logs/{revision_log}', [
     'uses' => 'RevisionLogsController@show'
 ]);
 
+Route::group(['middleware' => 'api', 'prefix' => 'api'], function () {
+    Route::get('revisions', function () {
+        return App\Revision::all();
+    });
+
+    Route::get('logs', function () {
+        return App\RevisionLog::with('user')->get();
+    });
+});
+
 Route::group(['middleware' => 'webhooks'], function () {
     Route::get('auth/github', 'Auth\AuthController@redirectToGithub');
     Route::get('auth/google', 'Auth\AuthController@redirectToGoogle');
