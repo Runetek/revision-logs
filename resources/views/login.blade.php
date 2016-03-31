@@ -4,7 +4,7 @@
         <title>Revision Logs - Login</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <style>
             html, body {
@@ -32,7 +32,15 @@
             }
 
             .title {
-                font-size: 96px;
+                font-size: 48px;
+            }
+
+            p {
+                font-size: 24px;
+            }
+
+            a {
+                text-decoration: none;
             }
         </style>
     </head>

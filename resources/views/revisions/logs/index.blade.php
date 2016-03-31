@@ -32,7 +32,7 @@
           <tr>
             <td>
               <a href="/revisions/{{ $revision->id }}/logs/{{ $log->id }}">
-                {{ $log->id }}
+                View #{{ $log->id }}
               </a>
             </td>
             <td>
