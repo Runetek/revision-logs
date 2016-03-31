@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\User;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Socialite;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -68,5 +70,37 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback()
+    {
+        $githubUser = Socialite::driver('github')->user();
+
+        $user = User::firstOrNew(['github_id' => $githubUser->getId()]);
+
+        $user->token = $githubUser->token;
+        $user->email = $githubUser->getEmail();
+        $user->avatar = $githubUser->getAvatar();
+        $user->username = $githubUser->getNickname();
+        $user->save();
+
+        Auth::login($user);
+
+        return redirect('/');
     }
 }

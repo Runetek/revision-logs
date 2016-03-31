@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Crypt;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -12,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'github_id',
     ];
 
     /**
@@ -21,6 +22,21 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'token', 'github_id',
     ];
+
+    public function logs()
+    {
+        return $this->hasMany(RevisionLog::class);
+    }
+
+    public function getTokenAttribute()
+    {
+        return Crypt::decrypt($this->attributes['token']);
+    }
+
+    public function setTokenAttribute($value)
+    {
+        $this->attributes['token'] = Crypt::encrypt($value);
+    }
 }

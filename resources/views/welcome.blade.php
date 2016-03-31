@@ -38,7 +38,13 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">Revision Logs</div>
+
+                @if (Auth::check())
+                    Hello, {{ Auth::user()->username }}!
+                @else
+                    <a href="/auth/github">Login/Register</a>
+                @endif
             </div>
         </div>
     </body>
