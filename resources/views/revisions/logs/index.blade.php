@@ -5,12 +5,16 @@
   <div class="row">
     <div class="col-sm-10"></div>
     <div class="offset-col-sm-10 col-sm-2">
-      <a
-        class="btn btn-success"
-        href="/revisions/{{ $revision->id }}/logs/create"
-      >
-        Submit Log
-      </a>
+      @if (Auth::check())
+        <a
+          class="btn btn-success"
+          href="/revisions/{{ $revision->id }}/logs/create"
+        >
+          Submit Log
+        </a>
+      @else
+        Want to submit a log? <a href="/auth/github">login or register</a> first.
+      @endif
     </div>
   </div>
   <hr />
