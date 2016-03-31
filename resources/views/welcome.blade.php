@@ -43,7 +43,7 @@
                 @if (Auth::check())
                     Hello, {{ Auth::user()->username }}!
                 @else
-                    <a href="/auth/github">Login/Register</a>
+                    <a href="/auth/github">Login/Register with Github</a>
                 @endif
             </div>
         </div>
