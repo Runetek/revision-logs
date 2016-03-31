@@ -113,11 +113,11 @@ class AuthController extends Controller
 
         $user = User::firstOrNew([
             'oauth_provider' => $provider,
-            'oauth_id' => $oauthUser->getId()
+            'email' => $oauthUser->getEmail()
         ]);
 
         $user->token = $oauthUser->token;
-        $user->email = $oauthUser->getEmail();
+        $user->oauth_id = $oauthUser->getId();
         $user->avatar = $oauthUser->getAvatar();
         $user->username = $oauthUser->getNickname() ?: $oauthUser->getName();
         $user->save();
