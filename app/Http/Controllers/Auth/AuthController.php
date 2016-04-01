@@ -126,7 +126,7 @@ class AuthController extends Controller
         $user->oauth_id = $oauthUser->getId();
         $user->avatar = $oauthUser->getAvatar();
 
-        if ( ! is_null($user->username)) {
+        if (! $user->username) {
             $user->username = $oauthUser->getNickname() ?: $oauthUser->getName();
         }
 
