@@ -33,6 +33,9 @@ Route::get('revisions/{revision}/logs/{revision_log}', [
     'uses' => 'RevisionLogsController@show'
 ]);
 
+Route::get('users', 'UsersController@index');
+Route::get('users/{user}', 'UsersController@show');
+
 Route::group(['middleware' => 'api', 'prefix' => 'api'], function () {
     Route::get('revisions', function () {
         return App\Revision::all();
