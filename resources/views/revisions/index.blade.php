@@ -24,7 +24,7 @@
               {{ $revision->logs->count() }}
             </td>
             <td>
-              {{ $revision->created_at->format('Y-m-d') }}
+              {{ $revision->release ?: 'unknown' }}
             </td>
           </tr>
         @endforeach
